@@ -2,8 +2,12 @@ import { useState } from "react";
 import {STORAGE} from '../storage/storage';
 import  {addFavCityAction} from '../store/favoredCitiesReducer'
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchWeather } from "../asyncActon/fetchWeather";
+
 
 export function SearchBar(props){
+
+    
     
     const dispatch = useDispatch();
     const [userInput, setUserInput] = useState("");
@@ -16,13 +20,8 @@ export function SearchBar(props){
 
       e.preventDefault();
       alert(e.currentTarget.value);
-      //getWeather(e.currentTarget.value);
       if(e.currentTarget.value ==="") return;
-        const city = {
-          text: e.currentTarget.value,
-          id: Date.now()
-        }
-      dispatch( addFavCityAction(city));  
+        dispatch(fetchWeather(e.currentTarget.value));      
       setUserInput("");
       STORAGE.setLastLocation(e.currentTarget.value);
     };

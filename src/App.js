@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from'react-redux';
 import {addFavCityAction} from './store/favoredCitiesReducer'
 import { FavoritePlaces } from './ui/favoredPlaces';
 import { RemoveElement } from './ui/removeElement';
+import {fetchCustomers} from'./asyncActon/customer';
 
 function App(){
 
@@ -16,13 +17,15 @@ function App(){
   const dispatch = useDispatch();
 
   const favCities = useSelector(state => state.favoredPlaces.cities);
-  const lowListTasks = useSelector(state => state.low.tasks);
+  const lowListTasks = useSelector(state => state.customers.customers);
+  const forecast = useSelector(state=> state.forecast);
   console.log(favCities);
   console.log(lowListTasks);  
+  console.log(forecast);
 
   return(
     <div className="form">
-         
+         <button onClick={()=> dispatch(fetchCustomers())}>Get clients from base</button>
         <div className="inner_part">
             <SearchBar />
         <div className="content">
@@ -32,7 +35,8 @@ function App(){
                             <RenderNow
                              toggleState={toggleState}
                               />
-
+                          
+                         
                 
                         <RenderDetails 
                         toggleState={toggleState}
