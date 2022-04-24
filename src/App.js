@@ -15,13 +15,13 @@ function App(){
 
   const [toggleState, setToggleState] = useState(1); 
   const dispatch = useDispatch();
+  
+  const {favoredPlaces,  weatherData, customers} = useSelector(state => state);
 
-  const favCities = useSelector(state => state.favoredPlaces.cities);
-  const lowListTasks = useSelector(state => state.customers.customers);
-  const forecast = useSelector(state=> state.forecast);
-  console.log(favCities);
-  console.log(lowListTasks);  
-  console.log(forecast);
+ /* console.log(favoredPlaces);
+  console.log(customers);  
+  console.log(weatherData); */
+  const weatherResponse = weatherData;
 
   return(
     <div className="form">
@@ -34,16 +34,19 @@ function App(){
 
                             <RenderNow
                              toggleState={toggleState}
+                             weatherResponse={weatherResponse}
                               />
                           
                          
                 
                         <RenderDetails 
+                        weatherResponse={weatherResponse}
                         toggleState={toggleState}
-                        />
+                        /> 
 
                  
                         <RenderForecast 
+                         weatherResponse={weatherResponse}
                         toggleState={toggleState}
                         />
               
@@ -57,7 +60,7 @@ function App(){
                     <p className="text right_headerText">Added Locations</p>
                 </div>
                 <div className="display_right">
-                  <FavoritePlaces list={favCities.map((city, index) =>(
+                  <FavoritePlaces list={favoredPlaces.cities.map((city, index) =>(
                     <RemoveElement key={index} city={city.text} />
                   ))}/>
                 </div>

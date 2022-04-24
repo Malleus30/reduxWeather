@@ -2,7 +2,7 @@ import { useState } from "react";
 import {STORAGE} from '../storage/storage';
 import  {addFavCityAction} from '../store/favoredCitiesReducer'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchWeather } from "../asyncActon/fetchWeather";
+import { searchWeather} from "../asyncActon/fetchWeather";
 
 
 export function SearchBar(props){
@@ -21,11 +21,11 @@ export function SearchBar(props){
       e.preventDefault();
       alert(e.currentTarget.value);
       if(e.currentTarget.value ==="") return;
-        dispatch(fetchWeather(e.currentTarget.value));      
+        dispatch(searchWeather(e.currentTarget.value));      
       setUserInput("");
       STORAGE.setLastLocation(e.currentTarget.value);
     };
-    
+
 
     const handleKeyPress = (e) => {
       if (e.key === "Enter") {
@@ -41,3 +41,7 @@ export function SearchBar(props){
   </div>
     )  
    }
+
+
+
+  

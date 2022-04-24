@@ -4,28 +4,19 @@ import { useSelector } from "react-redux";
 
 export function RenderForecast(props){
 
- const weather = useSelector(state => state.forecast);
+ const weather = props.weatherResponse;
  const toggleState = props.toggleState;
  
- if(weather.forecast[0]){
+  
   return(
     <div className={toggleState === 3 ? "active-page" : "page"}>
       <div className="display_left" id='showForecast'>
-        <p className="text forecastHeader">weather.city</p>
-             {/*weather.forecast[0].list.map((item, index) => (
-               <RenderForecastItem key={index} weather={item}/>
-             ))*/} 
+        <p className="text forecastHeader">{weather?.forecast[0]?.name}</p>
+             {weather?.forecast[0]?.forecast?.list?.map((item, index) => (
+               <RenderForecastItem key={index} forecast={item}/>
+             ))} 
       </div>     
     </div>
 )
- } else{
-   return(
-    <div className={toggleState === 3 ? "active-page" : "page"}>
-    <div className="display_left" id='showForecast'>
-      <p className="text forecastHeader"></p>
-    </div>     
-  </div>
-   )
- }
- 
+
 }

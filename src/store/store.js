@@ -7,8 +7,8 @@ import {weatherReducer} from'./weatherReducer';
 
 const rootReducer = combineReducers({
     favoredPlaces:favCitiesReducer,
-    customers:customerReducer,
-    forecast:weatherReducer
+    weatherData:weatherReducer,
+    customers:customerReducer
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
