@@ -1,7 +1,6 @@
 export function RenderForecastItem (forecast){
 
     const ICON= "https://openweathermap.org/img/wn";
-    console.log(forecast.forecast)
     const date = forecast.forecast.dt_txt.slice(0,10);
     const time = forecast.forecast.dt_txt.slice(10);
     const temp = forecast.forecast.main.temp;

@@ -1,7 +1,9 @@
+import {STORAGE} from'../storage/storage';
 
-
+const  favCities = STORAGE.getFavoredFromStorage() || [];
+console.log(favCities);
 const defaultState = {
-    cities:[]
+    cities: [...favCities]
 }
 
 
@@ -15,12 +17,12 @@ export const favCitiesReducer = (state = defaultState, action) => {
 
         case ADD_FAV_CITY:
         return{
-          ...state, cities:[...state.cities, action.payload]
+          ...state, cities:[...action.payload]
         }
         
         case REMOVE_FAV_CITY:
           return{
-            ...state, cities: state.cities.filter(city => city.id !== action.payload.id)
+            ...state, cities: [...action.payload] //state.cities.filter(city => city.id !== action.payload)
           }
 
         default : return state;

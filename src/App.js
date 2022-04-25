@@ -18,9 +18,9 @@ function App(){
   
   const {favoredPlaces,  weatherData, customers} = useSelector(state => state);
 
- /* console.log(favoredPlaces);
-  console.log(customers);  
-  console.log(weatherData); */
+ console.log(favoredPlaces.cities);
+ // console.log(customers);  
+  //console.log(weatherData); 
   const weatherResponse = weatherData;
 
   return(
@@ -60,9 +60,9 @@ function App(){
                     <p className="text right_headerText">Added Locations</p>
                 </div>
                 <div className="display_right">
-                  <FavoritePlaces list={favoredPlaces.cities.map((city, index) =>(
-                    <RemoveElement key={index} city={city.text} />
-                  ))}/>
+                  <FavoritePlaces list={favoredPlaces?.cities?.map((city, index) =>(
+                    <RemoveElement key={index} city={city}  dispatch={dispatch} favCities={favoredPlaces.cities}/>
+                  ))}/> 
                 </div>
             </div>
 

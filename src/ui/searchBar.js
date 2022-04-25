@@ -19,7 +19,6 @@ export function SearchBar(props){
     const handleSubmit = (e) => {
 
       e.preventDefault();
-      alert(e.currentTarget.value);
       if(e.currentTarget.value ==="") return;
         dispatch(searchWeather(e.currentTarget.value));      
       setUserInput("");

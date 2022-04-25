@@ -1,12 +1,14 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { addFavCityAction } from "../store/favoredCitiesReducer";
+import {STORAGE} from'../storage/storage';
 
 export function RenderNow(props){
 
   
    const {weatherResponse} = props;
    const ICON= "https://openweathermap.org/img/wn";
-  
+   const favCities = props.favCities;
+
   let pic= undefined;
   
    if(weatherResponse.forecast[0]){
@@ -16,13 +18,13 @@ export function RenderNow(props){
    
    const onLike = () =>{
          if(!weatherResponse.forecast[0].name) return;
-          const city = {
-          text: weatherResponse.forecast[0].name,
-          id: Date.now()
-        }
-      dispatch( addFavCityAction(city)); 
+          const city = weatherResponse.forecast[0].name;
+          const  set = new Set(STORAGE.getFavoredFromStorage()) || new Set();
+          set.add(city);
+          STORAGE.setFavoredToStorage([...set]);
+      dispatch( addFavCityAction(set)); 
    }
-    console.log(weatherResponse.forecast[0]);
+    
     const toggleState = props.toggleState;
     
     if(weatherResponse.forecast[0]){
